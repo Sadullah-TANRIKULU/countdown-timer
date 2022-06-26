@@ -1,22 +1,24 @@
 const startBtn = document.querySelector('.start-btn');
 
+const audio = document.querySelector('audio');
+
 const pauseBtn = document.querySelector('.pause-btn');
 
 const resetBtn = document.querySelector('.reset-btn');
 
-const startingMinutes = document.querySelector('#countdown-input').value = '10';
+let startingMinutes = document.querySelector('#countdown-input').value = 1;
 console.log(startingMinutes);
 
 let time = startingMinutes * 60;
 console.log(time);
-
-const countdownEl = document.getElementById('countdown');
-
-let startCountdown;
-
 let minutes = 0;
 
 let seconds = 0;
+const countdownEl = document.getElementById('countdown');
+countdownEl.innerHTML = `0${minutes} : 0${seconds}`;
+
+
+let startCountdown;
 
 function updateCountdown() {
     minutes = Math.floor(time / 60);
@@ -26,6 +28,15 @@ function updateCountdown() {
 
     countdownEl.innerHTML = `${minutes} : ${seconds}`;
     time--;
+
+    if (!time) {
+        clearInterval(startCountdown);
+        time = startingMinutes * 60
+        minutes = 0;
+        seconds = 0;
+        countdownEl.innerHTML = `${minutes} : 0${seconds}`;
+        audio.play();
+    }
 }
 
 startBtn.addEventListener('click', () => {
