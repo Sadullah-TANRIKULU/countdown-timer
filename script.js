@@ -44,8 +44,8 @@ function updateCountdown() {
     }
 }
 
+
 startBtn.addEventListener('click', () => {
-    
     
         if (!pause) {
 
@@ -53,8 +53,6 @@ startBtn.addEventListener('click', () => {
         } else {
             pause = false;
         }
-    
-
 
     startCountdown = setInterval(updateCountdown, 1000);
 
@@ -62,11 +60,14 @@ startBtn.addEventListener('click', () => {
 
 });
 
+
 pauseBtn.addEventListener('click', () => {
 
     pause = true;
+
     clearInterval(startCountdown);
 });
+
 
 resetBtn.addEventListener('click', () => {
 
@@ -80,6 +81,7 @@ resetBtn.addEventListener('click', () => {
     countdownEl.innerHTML = `${minutes} : ${seconds}`;
     pause = false;
 })
+
 
 window.onload = () => {
     document.querySelector('#countdown-input').focus();
