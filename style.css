@@ -11,8 +11,10 @@ body {
 }
 #countdown-input {
     border: none;
-    width: 20rem;
+    width: 3rem;
+    height: 3rem;
     opacity: 0.3;
+    font-size: 2rem;
 }
 
 #countdown {
