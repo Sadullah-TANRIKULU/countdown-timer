@@ -6,27 +6,25 @@ const pauseBtn = document.querySelector('.pause-btn');
 
 const resetBtn = document.querySelector('.reset-btn');
 
-let startingMinutes = document.querySelector('#countdown-input').value;
-console.log(startingMinutes);
+let startingMinutes = document.querySelector('#countdown-input');
 
-let time = startingMinutes * 60;
-console.log(time);
+const countdownEl = document.getElementById('countdown');
+
+let time = 0;
+
+let startCountdown;
 
 let minutes = 0;
 
 let seconds = 0;
 
-const countdownEl = document.getElementById('countdown');
-
-countdownEl.innerHTML = `0${minutes} : 0${seconds}`;
-
-
-let startCountdown;
-
-
+let pause = false;
+seconds = seconds < 10 ? '0' + seconds : seconds;
+countdownEl.innerHTML = `${minutes} : ${seconds}`;
 
 function updateCountdown() {
-    
+    console.log(time);
+
     minutes = Math.floor(time / 60);
     seconds = time % 60;
 
@@ -37,29 +35,48 @@ function updateCountdown() {
 
     if (!time) {
         clearInterval(startCountdown);
-        time = startingMinutes * 60
+        time = startingMinutes * 60;
         minutes = 0;
         seconds = 0;
-        countdownEl.innerHTML = `${minutes} : 0${seconds}`;
+        countdownEl.innerHTML = `${minutes} : ${seconds}`;
         audio.play();
+
     }
 }
 
 startBtn.addEventListener('click', () => {
-    startingMinutes = document.querySelector('#countdown-input').value;
+    
+    if (!pause) {
+        
+        time = startingMinutes.value * 60;
+    } else {
+        pause = false;
+    }
+
+
     startCountdown = setInterval(updateCountdown, 1000);
+
+    countdownEl.innerHTML = `${minutes} : ${seconds}`;
+
 });
 
 pauseBtn.addEventListener('click', () => {
+
+    pause = true;
     clearInterval(startCountdown);
 });
 
 resetBtn.addEventListener('click', () => {
+
     clearInterval(startCountdown);
-    time = startingMinutes * 60;
+    time = startingMinutes.value * 60;
+
     minutes = 0;
     seconds = 0;
-    countdownEl.innerHTML = `${minutes} : 0${seconds}`;
+
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    countdownEl.innerHTML = `${minutes} : ${seconds}`;
+    pause = false;
 })
 
 window.onload = () => {
