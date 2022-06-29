@@ -46,12 +46,14 @@ function updateCountdown() {
 
 startBtn.addEventListener('click', () => {
     
-    if (!pause) {
-        
-        time = startingMinutes.value * 60;
-    } else {
-        pause = false;
-    }
+    
+        if (!pause) {
+
+            time = startingMinutes.value * 60;
+        } else {
+            pause = false;
+        }
+    
 
 
     startCountdown = setInterval(updateCountdown, 1000);
